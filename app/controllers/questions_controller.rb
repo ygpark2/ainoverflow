@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answers = @question.answers.all(:order => 'selected DESC')
+    @link_questions = Question.tagged_with(@question.tag_list, :any => true)
   end
 
   def edit

@@ -97,11 +97,14 @@
             <div class="col-md-12 pull-right">Relevant Questions</div>
           </div>
         </div>
-
         <ul class="list-group">
-          <li class="list-group-item">
-
-          </li>
+        <% @link_questions.each do |lq| %>
+            <li class="list-group-item">
+              <%= link_to question_path(lq) do %>
+                <%= lq.title %>
+              <% end %>
+            </li>
+        <% end %>
         </ul>
       </div>
 

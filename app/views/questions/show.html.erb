@@ -1,0 +1,137 @@
+<div class="row row-offcanvas row-offcanvas-right">
+
+  <div class="col-xs-12 col-sm-9">
+    <div class="row">
+      <div class="col-xs-2 col-sm-1 col-md-1">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a id="qnaVoteUp" onclick="return false;" href="javascript://">
+              <i class="fa fa-caret-up fa-3x"></i>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center"> <strong id="updated_question_vote_count">0</strong> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a id="qnaVoteDown" onclick="return false;" href="javascript://">
+              <i class="fa fa-caret-down fa-3x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-10 col-sm-11">
+        <h2><%= @question.title %> </h2>
+        <p>
+          <% @question.tag_list.each do |tag| %>
+          <a href="#"><span class="badge"><%= tag %></span></a>
+          <% end %>
+        </p>
+        </hr>
+        <%= @question.body %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <%= render partial: "answers/list", locals: {question: @question} %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <%= render partial: "answers/form", locals: {question: @question} %>
+      </div>
+    </div>
+  </div>
+
+  <div role="navigation" id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
+    <br/>
+    <div class="row show-grid">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <div class="row show-grid">
+            <div class="col-md-12 pull-right">Statistics</div>
+          </div>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row show-grid">
+              <div class="col-md-6 pull-left">Created At:</div>
+              <div class="col-md-6 pull-right"><%= @question.created_at %></div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row show-grid">
+              <div class="col-md-6 pull-left">Views:</div>
+              <div class="col-md-6 pull-right"><%= @question.total_views %></div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row show-grid">
+              <div class="col-md-6 pull-left">Updated At:</div>
+              <div class="col-md-6 pull-right"><%= @question.updated_at %></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <hr/>
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <div class="row show-grid">
+            <div class="col-md-12 pull-right">Relevant Questions</div>
+          </div>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--
+.question
+  %div{:class => 'data grid_11'}
+    %div{:class => 'grid_10'}
+      %h2.title= h @question.title
+      .body= @question.body
+    %div{:class => 'tags grid_10'}= tag_links(@question.tag_list)
+    %div{:class => 'grid_4'}
+      %div{:class => 'vote_box grid_1 alpha'}
+        = render :partial => 'common/vote_box' , :locals => {:model => @question}
+      %div.grid_3
+      - if logged_in?
+        = link_to(t('action.answer'), new_question_answer_path(@question) , :class => 'answer_new_form_link' , :rel => 'facebox')
+        = favorite_link(@question)
+        %span{:id => "flag_for_question_#{@question.id}"}
+          = link_to(t('action.flag') , new_question_flag_path(@question), :rel => 'facebox')
+      - if @question.user == current_user
+        = link_to(t('app.edit') , edit_question_path(@question))
+    = render :partial => 'common/user_box' , :locals => {:user => @question.user}
+.clear
+
+#answers
+  = render :partial => 'answers/answer' , :collection => @answers
+
+- content_for :javascripts do
+  = javascript_include_tag('vote/question')
+  = javascript_include_tag('answer/select')
+  = javascript_include_tag('favorite/call')
+  = javascript_include_tag('syntax_highlighter/shCore')
+  - %w(shBrushBash.js	shBrushCSharp.js 	shBrushCpp.js shBrushCss.js	shBrushDelphi.js 	shBrushDiff.js shBrushGroovy.js	shBrushJScript.js shBrushJava.js	shBrushPerl.js shBrushPhp.js shBrushPlain.js shBrushPython.js shBrushRuby.js shBrushScala.js shBrushSql.js shBrushVb.js	shBrushXml.js).each do |sh|
+    = javascript_include_tag("syntax_highlighter/#{sh}")
+  = javascript_tag("SyntaxHighlighter.config.clipboardSwf = 'javascripts/syntax_highlighter/clipboard.swf';SyntaxHighlighter.all();")
+
+
+
+- content_for :stylesheets do
+  = stylesheet_link_tag('shThemeDefault' , 'shCore' , 'wmd')
+
+-->

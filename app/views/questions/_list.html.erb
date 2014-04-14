@@ -1,0 +1,100 @@
+<div class="row row-offcanvas row-offcanvas-right">
+
+  <div class="col-xs-12 col-sm-9">
+    <% @questions.each do |question| %>
+    <div>
+      <div class="row show-grid">
+        <div class="col-md-9">
+          <span class="item-title">
+            <%= link_to question.title, question %>
+          </span>
+          <p>
+            <% question.tag_list.each do |tag| %>
+            <a href="#"><span class="badge"><%= tag %></span></a>
+            <% end %>
+          </p>
+        </div>
+        <div class="col-md-1">
+          <div class="votes some-votes text-center">
+            <span class="item-count"><%= (question.upvotes.size - question.downvotes.size) %></span>
+            <div>Votes</div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <div class="answers accepted text-center">
+            <span class="item-count"><%= question.answers_count %></span>
+            <div>Answers</div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <div class="views some-views text-center">
+            <span class="item-count"><%= question.total_views %></span>
+            <div>Views</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <ul class="list-inline pull-right">
+            <li><p class="text-right"><%= question.updated_at %></p></li>
+            <li><p class="text-right"></p></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <% end %>
+
+    <div>
+      <div class="text-center">
+        <ul class="pagination">
+          <!-- pagination -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div role="navigation" id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
+    <div class="row show-grid well-sm">
+      <div class="col-md-12">
+
+        <% if user_signed_in? %>
+          <%= link_to "Question", new_question_path, :class => "btn btn-primary btn-lg btn-block" %>
+        <% else %>
+          You need to login to ask a question.
+        <% end %>
+
+      </div>
+    </div>
+    <div class="row show-grid">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Participants</div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row show-grid">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Tags</div>
+          <div class="panel-body">
+
+            <ul class="nav nav-pills nav-stacked">
+              <% @tags.each do |tag| %>
+              <li>
+                <a href="#"><span class="badge pull-right"><%= tag.taggings_count %></span><%= tag.name %></a>
+              </li>
+              <% end %>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

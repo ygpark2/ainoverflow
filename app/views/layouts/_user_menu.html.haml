@@ -1,0 +1,8 @@
+%ul
+  %li= link_to(t('app.feedbacks'), new_feedback_path, :rel => 'facebox')
+  - if logged_in?
+    %li= link_to(t('app.profile'), user_path(current_user))
+    %li= link_to(t('app.logout'), logout_path)
+  - else  
+    %li= link_to(t('app.register'), register_path)
+    %li= link_to(t('app.login'), login_path)

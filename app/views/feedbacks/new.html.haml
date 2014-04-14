@@ -1,0 +1,20 @@
+%h1 Nuevo Feedback
+
+= error_messages_for :feedback
+
+.form
+  - form_for @feedback do |f|
+ 
+    - unless logged_in?
+      .field
+        = f.label t("feedback.email")
+        = f.text_field :email
+    .field
+      = f.label t("feedback.title")
+      = f.text_field :title
+    .field
+      = f.label t("feedback.body")
+      = f.text_area :body
+
+    = submit_tag t("feedback.create_button")
+

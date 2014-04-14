@@ -1,0 +1,21 @@
+<div style="margin-bottom: 30px;" class="row show-grid">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="pull-left">
+        <h3 style="margin-top: 8px;"> <%= @question.answers.size %> Answers</h3>
+      </li>
+      <li class="active pull-right"><a href="#">active</a></li>
+      <li class="pull-right"><a href="#">vote</a></li>
+      <li class="pull-right"><a href="#">oldest</a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="answer_list" class="row">
+  <% @question.answers.each do |answer| %>
+  <div class="col-md-12 text-right">
+    <p><%= answer.body %> - <%= answer.updated_at %> </p>
+    <hr/>
+  </div>
+  <% end %>
+</div>

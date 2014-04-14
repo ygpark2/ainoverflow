@@ -1,0 +1,5 @@
+<% if @questions.nil? || @questions.empty? %>
+  <div class="one">No Question</div>
+<% else %>
+  <%= render partial: "questions/list", locals: {questions: @questions} %>
+<% end %>

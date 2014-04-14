@@ -1,0 +1,14 @@
+<% if @questions.nil? || @questions.empty? %>
+  <div class="one">123</div>
+<% else %>
+ <div class="two">something else</div>
+<% end %>
+
+-if 
+  No questions.
+-else
+  -@questions.each do |question|
+    = render :partial => 'questions/index_question' , :locals => {:question => question}
+
+
+= will_paginate @questions 

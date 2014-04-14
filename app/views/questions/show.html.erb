@@ -25,7 +25,9 @@
         <h2><%= @question.title %> </h2>
         <p>
           <% @question.tag_list.each do |tag| %>
-          <a href="#"><span class="badge"><%= tag %></span></a>
+            <%= link_to tag_question_path(tag) do %>
+              <span class="badge"><%= tag %></span>
+            <% end %>
           <% end %>
         </p>
         </hr>
@@ -46,6 +48,17 @@
 
   <div role="navigation" id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
     <br/>
+    <div class="row show-grid">
+      <div class="col-md-12 pull-right">
+        <% if user_signed_in? %>
+          <%= link_to "New Question", new_question_path, :class => "btn btn-primary btn-md" %>
+        <% else %>
+
+        <% end %>
+        <%= link_to "Question List", questions_path, :class => "btn btn-primary btn-md" %>
+      </div>
+    </div>
+    <hr/>
     <div class="row show-grid">
       <div class="panel panel-default">
 

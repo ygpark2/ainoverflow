@@ -70,6 +70,7 @@ class QuestionsController < ApplicationController
 
   def tag
     @questions = Question.tagged_with(params[:id] , :on => :tags).paginate(:page => params[:page] || 1, :per_page => 20)
+    @tags = Question.tag_counts_on(:tags)
     render 'index'
   end
 

@@ -11,15 +11,20 @@ AinOverflow::Application.routes.draw do
 
 
   # Questions
-  resources :questions, :member => {:vote => :post, :tag => :get},
-                            :collection => {:unanswered => :get , :hot => :get} do |question|
+  resources :questions do
+    get 'tag', :on => :member
+    post 'vote', :on => :member
+    get 'unanswered', :on => :collection
+    get 'hot', :on => :collection
     resources :answers
     resources :flags
     resource :favorites
   end
 
   # Answers
-  resources :answers, :member => {:vote => :post, :select => :post} do |answer|
+  resources :answers do
+    post 'select', :on => :member
+    post 'vote', :on => :member
     resources :comments
     resources :flags
   end
@@ -30,7 +35,7 @@ AinOverflow::Application.routes.draw do
 
   resources :search ,  :controller => 'search'
 
-  # Feedbacks system
+ # Feedbacks system
   resources :feedbacks
 
   # == Admin Namespace

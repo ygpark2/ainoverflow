@@ -51,6 +51,7 @@ class QuestionsController < ApplicationController
     comment = question.comments.create
     comment.title = "question - " + params[:id]
     comment.comment = params[:body]
+    comment.user_id = current_user
     if comment.save
       flash[:notice] = t('flash.notice.question.create.valid')
     else

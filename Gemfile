@@ -61,4 +61,6 @@ gem 'acts_as_votable', '~> 0.8.0'
 
 gem 'will_paginate', '~> 3.0'
 
+gem 'select2-rails'
+
 # gem 'haml-rails'

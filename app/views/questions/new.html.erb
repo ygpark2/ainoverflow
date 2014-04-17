@@ -1,3 +1,41 @@
-<h1>New Question</h1>
+<div class="row row-offcanvas row-offcanvas-right">
 
-<%= render partial: "form", locals: {question: @question} %>
+  <div class="col-xs-12 col-sm-9">
+    <h1>New Question</h1>
+
+    <%= render partial: "form", locals: {question: @question} %>
+
+  </div>
+
+  <div role="navigation" id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
+    <div class="row show-grid well-sm">
+      <div class="col-md-12">
+
+      </div>
+    </div>
+    <div class="row show-grid">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Participants</div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row show-grid">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Tags</div>
+          <div class="panel-body">
+
+            <ul class="nav nav-pills nav-stacked">
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

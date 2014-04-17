@@ -18,12 +18,23 @@ ActiveRecord::Schema.define(version: 20140414101508) do
     t.text     "parsed_body"
     t.integer  "user_id"
     t.integer  "question_id"
-    t.boolean  "flag",        default: false
-    t.boolean  "selected",    default: false
-    t.boolean  "banned",      default: false
+    t.boolean  "flag",                  default: false
+    t.boolean  "selected",              default: false
+    t.boolean  "banned",                default: false
+    t.integer  "cached_votes_total",    default: 0
+    t.integer  "cached_votes_score",    default: 0
+    t.integer  "cached_votes_up",       default: 0
+    t.integer  "cached_votes_down",     default: 0
+    t.integer  "cached_weighted_score", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "answers", ["cached_votes_down"], name: "index_answers_on_cached_votes_down"
+  add_index "answers", ["cached_votes_score"], name: "index_answers_on_cached_votes_score"
+  add_index "answers", ["cached_votes_total"], name: "index_answers_on_cached_votes_total"
+  add_index "answers", ["cached_votes_up"], name: "index_answers_on_cached_votes_up"
+  add_index "answers", ["cached_weighted_score"], name: "index_answers_on_cached_weighted_score"
 
   create_table "badges", force: true do |t|
     t.string   "title"
@@ -73,15 +84,26 @@ ActiveRecord::Schema.define(version: 20140414101508) do
     t.string   "title"
     t.text     "body"
     t.text     "parsed_body"
-    t.integer  "total_views",   default: 0
-    t.integer  "answers_count", default: 0
+    t.integer  "total_views",           default: 0
+    t.integer  "answers_count",         default: 0
     t.integer  "user_id"
-    t.boolean  "flag",          default: false
-    t.boolean  "answered",      default: false
-    t.boolean  "banned",        default: false
+    t.boolean  "flag",                  default: false
+    t.boolean  "answered",              default: false
+    t.boolean  "banned",                default: false
+    t.integer  "cached_votes_total",    default: 0
+    t.integer  "cached_votes_score",    default: 0
+    t.integer  "cached_votes_up",       default: 0
+    t.integer  "cached_votes_down",     default: 0
+    t.integer  "cached_weighted_score", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "questions", ["cached_votes_down"], name: "index_questions_on_cached_votes_down"
+  add_index "questions", ["cached_votes_score"], name: "index_questions_on_cached_votes_score"
+  add_index "questions", ["cached_votes_total"], name: "index_questions_on_cached_votes_total"
+  add_index "questions", ["cached_votes_up"], name: "index_questions_on_cached_votes_up"
+  add_index "questions", ["cached_weighted_score"], name: "index_questions_on_cached_weighted_score"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

@@ -64,25 +64,19 @@ class QuestionsController < ApplicationController
   end
 
   def vote
-    @question = Question.find(params[:id])
-    @vote = @question.votes.find_by_user_id(current_user.id)
-    if @vote
-      if @vote.vote.to_s == params[:vote]
-        flash[:notice] = t('flash.notice.question.vote.nochange')
-      else
-        @vote.update_attributes(:vote => params[:vote])
+    question = Question.find(params[:id])
+    if params[:vote].to_s.eql?("up")
+      if question.upvote_from current_user, :vote_scope => 'rank', :vote_weight => 1
         flash[:notice] = t('flash.notice.question.vote.update')
       end
     else
-      @vote = @question.votes.build(:user => current_user , :vote => params[:vote])
-      if @vote.save
-        flash[:notice] = t('flash.notice.question.vote.valid')
-      else
-        flash[:notice] = t('flash.notice.question.vote.invalid')
+      if question.downvote_from current_user, :vote_scope => 'rank', :vote_weight => 1
+        flash[:notice] = t('flash.notice.question.vote.update')
       end
     end
+
     respond_to do |format|
-      format.js {}
+      format.json { render :json => question }
     end
   end
 

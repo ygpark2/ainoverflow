@@ -1,6 +1,10 @@
 <div class="row row-offcanvas row-offcanvas-right">
 
   <div class="col-xs-12 col-sm-9">
+    <% if @questions.nil? || @questions.empty? %>
+      <div class="one">No Question</div>
+    <% else %>
+
     <% @questions.each do |question| %>
     <div>
       <div class="row show-grid">
@@ -47,13 +51,12 @@
       <hr>
     </div>
     <% end %>
+    <% end %>
 
-    <div>
-      <div class="text-center">
-        <ul class="pagination">
-          <!-- pagination -->
-        </ul>
-      </div>
+    <div class="text-center">
+      <ul class="pagination">
+        <!-- pagination -->
+      </ul>
     </div>
   </div>
 

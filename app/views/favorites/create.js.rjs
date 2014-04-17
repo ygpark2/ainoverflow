@@ -1,1 +1,0 @@
-page << "fav = $(\"a[rel='post']\"); fav.html('favorite'); fav.attr({rel : 'delete'})"

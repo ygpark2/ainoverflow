@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_filter :load_question , :except => [:vote , :select , :flag ,:edit , :update]
+  before_filter :load_question, :except => [:comment, :vote , :select , :flag ,:edit , :update]
   skip_before_filter :verify_authenticity_token
 
   def new
@@ -8,19 +8,15 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.build(:user => current_user , :body => params[:body])
-    # comment = commentable.comments.create
-    # comment.title = "First comment."
-    # comment.comment = "This is the first comment."
-    # comment.save
-    if @answer.save
+    answer = @question.answers.build(:user => current_user , :body => params[:body])
+    if answer.save
       flash[:notice] = t('flash.notice.answer.create.valid')
     else
       flash[:notice] = t('flash.notice.answer.create.invalid')
     end
     respond_to do |format|
       format.html { redirect_to question_path(@question)}
-      format.js
+      format.json { render :json => answer }
     end
   end
 
@@ -38,10 +34,27 @@ class AnswersController < ApplicationController
         flash[:notice] = t('flash.notice.answer.update.invalid')
         format.html{render 'edit'}
       end
-    end 
-    
+    end
+
   end
-  
+
+  def comment
+    answer = Answer.find(params[:id])
+    comment = answer.comments.create
+    comment.title = "answer - " + params[:id]
+    comment.comment = params[:body]
+    comment.user_id = current_user
+    if comment.save
+      flash[:notice] = t('flash.notice.question.create.valid')
+    else
+      flash[:notice] = t('flash.notice.question.create.invalid')
+    end
+    respond_to do |format|
+      format.html { redirect_to question_path(answer.question)}
+      format.json { render :json => comment }
+    end
+  end
+
   def vote
     @answer = Answer.find(params[:id])
     @vote = @answer.votes.find_by_user_id(current_user.id)

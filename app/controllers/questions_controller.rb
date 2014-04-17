@@ -46,6 +46,22 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def comment
+    question = Question.find(params[:id])
+    comment = question.comments.create
+    comment.title = "question - " + params[:id]
+    comment.comment = params[:body]
+    if comment.save
+      flash[:notice] = t('flash.notice.question.create.valid')
+    else
+      flash[:notice] = t('flash.notice.question.create.invalid')
+    end
+    respond_to do |format|
+      format.html { redirect_to question_path(question)}
+      format.json { render :json => comment }
+    end
+  end
+
   def vote
     @question = Question.find(params[:id])
     @vote = @question.votes.find_by_user_id(current_user.id)

@@ -14,6 +14,7 @@ AinOverflow::Application.routes.draw do
   resources :questions do
     get 'tag', :on => :member
     post 'vote', :on => :member
+    post 'comment', :on => :member
     get 'unanswered', :on => :collection
     get 'hot', :on => :collection
     resources :answers
@@ -25,13 +26,13 @@ AinOverflow::Application.routes.draw do
   resources :answers do
     post 'select', :on => :member
     post 'vote', :on => :member
-    resources :comments
+    post 'comment', :on => :member
     resources :flags
   end
 
-  #resources :comments do |comment|
-  #  comment.resources :flags
-  #end
+  # resources :comments do
+  #    resources :comments
+  # end
 
   resources :search ,  :controller => 'search'
 

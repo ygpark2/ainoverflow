@@ -6,3 +6,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require answer/create.coffee
+//= require comment/create.coffee

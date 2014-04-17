@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <a id="qnaVoteUp" onclick="return false;" href="javascript://">
-              <i class="fa fa-caret-up fa-3x"></i>
+              <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
           </div>
         </div>
@@ -16,7 +16,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <a id="qnaVoteDown" onclick="return false;" href="javascript://">
-              <i class="fa fa-caret-down fa-3x"></i>
+              <span class="glyphicon glyphicon-chevron-down"></span>
             </a>
           </div>
         </div>
@@ -32,6 +32,29 @@
         </p>
         </hr>
         <%= @question.body %>
+        <p></p>
+        <div class="row">
+          <div class="col-md-12" id="question_comment_list">
+            <%= render partial: "comments/list", locals: {parameter: @question} %>
+          </div>
+        </div>
+
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title text-right">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseComment">
+                  Comment
+                </a>
+              </h4>
+            </div>
+            <div id="collapseComment" class="panel-collapse collapse">
+              <div class="panel-body">
+                <%= render partial: "comments/question_form", locals: {question: @question} %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">

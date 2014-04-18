@@ -1,4 +1,4 @@
-<%= form_tag question_answers_path(@question, :format => :json), :remote => true, :id => 'answer_form' do %>
+<%= form_tag question_answers_path(@question), :remote => true, :'data-type' => 'html', :id => 'answer_form' do %>
   <%= text_area_tag :body , '' , :cols => 82, :rows => 16, :id => "answer_text_area", :class => "form-control"  %>
   <%= button_tag "Submit", :class => "btn btn-default pull-right" %>
 <% end %>

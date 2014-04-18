@@ -8,14 +8,15 @@ class AnswersController < ApplicationController
   end
 
   def create
-    answer = @question.answers.build(:user => current_user , :body => params[:body])
-    if answer.save
+    @answer = @question.answers.build(:user => current_user , :body => params[:body])
+    if @answer.save
       flash[:notice] = t('flash.notice.answer.create.valid')
     else
       flash[:notice] = t('flash.notice.answer.create.invalid')
     end
     respond_to do |format|
-      format.html { redirect_to question_path(@question)}
+      format.html { render :layout => false } # redirect_to question_path(@question)}
+      format.js { Rails.logger.info "in JS handler" }
       format.json { render :json => answer }
     end
   end

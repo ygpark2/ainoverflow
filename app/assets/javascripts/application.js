@@ -6,5 +6,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require select2
-//= require answer/create.coffee
-//= require comment/create.coffee
+//= require_tree .

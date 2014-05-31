@@ -1,0 +1,52 @@
+
+    <div class="row">
+      <div class="col-xs-2 col-sm-1 col-md-1">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a id="qnaVoteUp" onclick="return false;" href="javascript://">
+              <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center"> <strong id="updated_question_vote_count">0</strong> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a id="qnaVoteDown" onclick="return false;" href="javascript://">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-10 col-sm-11 col-md-11 text-right">
+        <%= @answer.body %> - <%= @answer.updated_at %>
+
+        <hr/>
+        <div class="row">
+          <div class="col-md-12" id="answer_comment_list">
+            <%= render partial: "comments/list", locals: {parameter: @answer} %>
+          </div>
+        </div>
+
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title text-right">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseCommentA<%= @answer.id %>">
+                  Comment
+                </a>
+              </h4>
+            </div>
+            <div id="collapseCommentA<%= @answer.id %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <%= render partial: "comments/answer_form", locals: {answer: @answer} %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <hr/>
+

@@ -1,0 +1,4 @@
+<%= form_tag comment_answer_path(answer, :format => :json), :remote => true, :id => 'comment_answer_form' do %>
+  <%= text_area_tag :body , '' , :cols => 12, :rows => 3, :id => "comment_answer_form", :class => "form-control"  %>
+  <%= button_tag "Submit", :class => "btn btn-default" %>
+<% end %>

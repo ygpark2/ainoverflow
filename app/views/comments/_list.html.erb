@@ -1,0 +1,5 @@
+<% parameter.comments.recent.limit(10).all.each do |comment| %>
+<p class="text-right"><%= comment.comment %></p>
+<p class="text-right"><%= comment.updated_at %></p>
+<hr/>
+<% end %>
